@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.wb.cpedemo">
+
+    <!-- Permissions -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />"
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.MEDIA_CONTENT_CONTROL" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="net.flixster.android.ACCESS_COMM" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
+
+    <application
+        android:allowBackup="true"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <uses-library
+            android:name="com.google.android.maps"
+            android:required="false" />
+
+
+        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyAiW6KywBMiJirAIMpikOC162jVefUIBMY"/>
+
+        <activity
+            android:name=".CPEDemoActivity"
+            android:screenOrientation="sensorLandscape"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <!-- NextGen Library -->
+        <activity
+            android:name="com.wb.nextgenlibrary.activity.NextGenActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+
+        </activity>
+        <activity
+            android:name="com.wb.nextgenlibrary.testassets.TestItemsActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+
+        </activity>
+        <activity
+            android:name="com.wb.nextgenlibrary.activity.WebViewActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+
+        </activity>
+
+        <activity
+            android:name="com.wb.nextgenlibrary.activity.InterStitialVideoPlayerActivity"
+            android:screenOrientation="sensorLandscape"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/Theme.Nge.NoTitle">
+
+        </activity>
+
+
+
+        <activity android:name="com.wb.nextgenlibrary.activity.NextGenPlayer"
+                  android:screenOrientation="fullSensor"
+                  android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+                  android:exported="false"
+                  android:theme="@style/NextGenPlayerActionBar" >
+
+        </activity>
+
+        <activity android:name="com.wb.nextgenlibrary.activity.NextGenExtraActivity"
+                  android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+                  android:exported="false"
+                  android:theme="@style/ExtraActionBar" >
+        </activity><activity android:name="com.wb.nextgenlibrary.activity.ECGalleryActivity"
+                             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+                             android:exported="false"
+                             android:theme="@style/ExtraActionBar" >
+    </activity>
+        <activity android:name="com.wb.nextgenlibrary.activity.ECSceneLocationActivity"
+                  android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+                  android:exported="false"
+                  android:theme="@style/ExtraActionBar" >
+        </activity>
+        <activity android:name="com.wb.nextgenlibrary.activity.ECVideoActivity"
+                  android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+                  android:exported="false"
+                  android:theme="@style/ExtraActionBar" >
+        </activity>
+        <activity android:name="com.wb.nextgenlibrary.activity.ActorGalleryActivity"
+                  android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+                  android:exported="false"
+                  android:theme="@style/ExtraActionBar" >
+        </activity>
+        <activity android:name="com.wb.nextgenlibrary.activity.TheTakeShopCategoryActivity"
+                  android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+                  android:exported="false"
+                  android:theme="@style/ExtraActionBar" >
+        </activity>
+
+        <!-- phone -->
+        <activity android:name="com.wb.nextgenlibrary.activity.phone.NextGenActorsActivity_Phone"
+                  android:screenOrientation="sensorPortrait"
+                  android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+                  android:exported="false"
+                  android:theme="@style/ExtraActionBar" >
+        </activity>
+
+    </application>
+
+</manifest>
