@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.MediaController;
 
-import com.wb.nextgenlibrary.fragment.AbstractNextGenMainMovieFragment;
+import com.wb.nextgenlibrary.fragment.AbstractNGEMainMovieFragment;
 import com.wb.nextgenlibrary.widget.CustomMediaController;
 
 import com.wb.cpedemo.R;
@@ -24,7 +24,7 @@ import com.wb.cpedemo.mainmoviefragment.SimpleObserveVideoView.IVideoViewActionL
  * Created by gzcheng on 10/28/16.
  */
 
-public class SimpleMainMovieFragment extends AbstractNextGenMainMovieFragment implements SimpleObserveVideoView.PlayPauseListener{
+public class SimpleMainMovieFragment extends AbstractNGEMainMovieFragment implements SimpleObserveVideoView.PlayPauseListener{
 
 
 	protected SimpleObserveVideoView videoView;
@@ -98,6 +98,18 @@ public class SimpleMainMovieFragment extends AbstractNextGenMainMovieFragment im
 		if (videoView != null) {
 			try {
 				return videoView.getCurrentPosition();
+			}catch (Exception ex){
+				return 0;
+			}
+		}else
+			return 0;
+	}
+
+	@Override
+	public int getDuration(){
+		if (videoView != null) {
+			try {
+				return videoView.getDuration();
 			}catch (Exception ex){
 				return 0;
 			}
@@ -253,7 +265,7 @@ public class SimpleMainMovieFragment extends AbstractNextGenMainMovieFragment im
 						isPlaying = true;
 						savePlayState(isPlaying);
 						if (nextGenVideoViewListener != null)
-							nextGenVideoViewListener.onResume();
+							nextGenVideoViewListener.onVideoResume();
 					}
 
 					@Override
@@ -261,7 +273,7 @@ public class SimpleMainMovieFragment extends AbstractNextGenMainMovieFragment im
 						isPlaying = false;
 						savePlayState(isPlaying);
 						if (nextGenVideoViewListener != null)
-							nextGenVideoViewListener.onPause();
+							nextGenVideoViewListener.onVideoPause();
 					}
 				});
 
@@ -439,5 +451,12 @@ public class SimpleMainMovieFragment extends AbstractNextGenMainMovieFragment im
 			}
 			return true;
 		}
+	}
+
+	public void pauseForIME(){
+	}
+
+	public void resumePlaybackFromIME(){
+
 	}
 }

@@ -19,9 +19,6 @@ apply plugin: 'com.android.application'
 
 repositories {
     mavenCentral()
-    maven {
-        url 'http://ci.warnerbros.com/artifactory/repo'
-    }
     jcenter()
     maven { url 'https://maven.fabric.io/public' }
 }

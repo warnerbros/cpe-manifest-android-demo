@@ -7,13 +7,16 @@ import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 
-import com.wb.nextgenlibrary.interfaces.NextGenEventHandler;
+import com.google.android.gms.cast.MediaInfo;
+import com.wb.nextgenlibrary.interfaces.NGEEventHandler;
+
+import org.json.JSONObject;
 
 /**
  * Created by gzcheng on 10/27/16.
  */
 
-public class CPEDemoHandler implements NextGenEventHandler {
+public class CPEDemoHandler implements NGEEventHandler {
 
 	public void handleMovieTitleSelection(final Activity activity, String movieId){
 		if (movieId == null && "".equals(movieId)){
@@ -64,5 +67,37 @@ public class CPEDemoHandler implements NextGenEventHandler {
 			fragment.startActivity(Intent.createChooser(share, ""));
 		else if (activity != null)
 			activity.startActivity(Intent.createChooser(share, ""));
+	}
+	public void handlePurchaseButtonPressed(Activity ngeActivity, Object contentObject){
+		if (ngeActivity != null)
+			ngeActivity.finish();
+
+	}
+
+	public boolean shouldShowInterstitialForContent(Object content){
+		return true;
+	}
+
+	public void setInterstitialWatchedForContent(Object content){
+
+	}
+	public void setInterstitialSkippedForContent(Object content){
+
+	}
+
+	public boolean areEqualMediaInfo(MediaInfo info1, MediaInfo info2){
+		return false;
+	}
+
+	public boolean isCasting(){
+		return false;
+	}
+
+	public void userEventLog(Object movieObject, String event, String action, String idValue, String nameValue){
+		//handle event loggings here.
+	}
+
+	public JSONObject createECVideoCastMetaData(String clipUrl, String clipName, String posterUrl){
+		return new JSONObject();
 	}
 }
