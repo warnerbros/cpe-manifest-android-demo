@@ -36,13 +36,15 @@ import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.Format;
+import com.google.android.exoplayer2.PlaybackParameters;
+import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.Timeline;
+import com.google.android.exoplayer2.drm.DefaultDrmSessionManager;
 import com.google.android.exoplayer2.drm.DrmSessionManager;
 import com.google.android.exoplayer2.drm.FrameworkMediaCrypto;
 import com.google.android.exoplayer2.drm.FrameworkMediaDrm;
 import com.google.android.exoplayer2.drm.HttpMediaDrmCallback;
-import com.google.android.exoplayer2.drm.StreamingDrmSessionManager;
 import com.google.android.exoplayer2.drm.UnsupportedDrmException;
 import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
 import com.google.android.exoplayer2.mediacodec.MediaCodecRenderer;
@@ -57,7 +59,7 @@ import com.google.android.exoplayer2.source.dash.DefaultDashChunkSource;
 import com.google.android.exoplayer2.source.hls.HlsMediaSource;
 import com.google.android.exoplayer2.source.smoothstreaming.DefaultSsChunkSource;
 import com.google.android.exoplayer2.source.smoothstreaming.SsMediaSource;
-import com.google.android.exoplayer2.trackselection.AdaptiveVideoTrackSelection;
+import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.trackselection.FixedTrackSelection;
 import com.google.android.exoplayer2.trackselection.MappingTrackSelector;
@@ -412,17 +414,12 @@ public class CPEDemoMovieFragment_Dash extends AbstractNGEMainMovieFragment impl
 						showToast(errorStringId);
 						return;
 					}
-					int extensionRendererMode = SimpleExoPlayer.EXTENSION_RENDERER_MODE_ON;//SimpleExoPlayer.EXTENSION_RENDERER_MODE_OFF;
 					TrackSelection.Factory videoTrackSelectionFactory =
-							new AdaptiveVideoTrackSelection.Factory(BANDWIDTH_METER);
+							new AdaptiveTrackSelection.Factory(BANDWIDTH_METER);
 					trackSelector = new DefaultTrackSelector(videoTrackSelectionFactory);
-					player = ExoPlayerFactory.newSimpleInstance(getActivity(), trackSelector, new DefaultLoadControl(),
-							drmSessionManager, extensionRendererMode);
+					player = ExoPlayerFactory.newSimpleInstance(getActivity(), trackSelector, new DefaultLoadControl());
 					player.addListener(this);
 				}
-
-				@SimpleExoPlayer.ExtensionRendererMode int extensionRendererMode = SimpleExoPlayer.EXTENSION_RENDERER_MODE_ON;//SimpleExoPlayer.EXTENSION_RENDERER_MODE_OFF;
-
 
 				simpleExoPlayerView.setPlayer(player);
 
@@ -552,9 +549,10 @@ public class CPEDemoMovieFragment_Dash extends AbstractNGEMainMovieFragment impl
 		if (Util.SDK_INT < 18) {
 			return null;
 		}
-		HttpMediaDrmCallback drmCallback = new HttpMediaDrmCallback(licenseUrl,
-				buildHttpDataSourceFactory(false), keyRequestProperties);
-		return new StreamingDrmSessionManager<>(uuid,
+
+		HttpMediaDrmCallback drmCallback =
+				new HttpMediaDrmCallback(licenseUrl, buildHttpDataSourceFactory(false));
+		return new DefaultDrmSessionManager<>(uuid,
 				FrameworkMediaDrm.newInstance(uuid), drmCallback, null, mainHandler, null);
 	}
 
@@ -607,6 +605,16 @@ public class CPEDemoMovieFragment_Dash extends AbstractNGEMainMovieFragment impl
 		}
 		if (rootView != null)
 			mediaController.setAnchorView(rootView);
+	}
+
+	@Override
+	public void onPlaybackParametersChanged(PlaybackParameters playbackParameters){
+
+	}
+
+	@Override
+	public void onRepeatModeChanged(@Player.RepeatMode int repeatMode){
+
 	}
 
 	@Override
