@@ -1,0 +1,2 @@
+include ':cpe-manifest-android-experience'
+project(':cpe-manifest-android-experience').projectDir = new File(settingsDir, '../cpe-manifest-android-experience')
